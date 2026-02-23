@@ -1,0 +1,284 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlayOpen { opacity: 1; pointer-events: all; }
+
+.sidebar {
+  position: fixed;
+  top: 0; right: -460px; bottom: 0;
+  width: 440px;
+  background: var(--soft-cream);
+  z-index: 2001;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -16px 0 48px rgba(0,0,0,0.15);
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.sidebarOpen { right: 0; }
+
+.header {
+  background: var(--deep-brown);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.headerLeft { display: flex; align-items: center; gap: 12px; }
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: var(--warm-gold);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.backBtn:hover { opacity: 1; }
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: rgba(245,237,216,0.6);
+  font-size: 1.2rem;
+  transition: color 0.2s;
+}
+.closeBtn:hover { color: var(--cream); }
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 28px;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(42,24,16,0.4);
+}
+.emptyIcon { font-size: 3rem; margin-bottom: 12px; }
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(42,24,16,0.08);
+}
+
+.itemInfo { flex: 1; }
+.itemName {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--deep-brown);
+}
+.itemPrice { color: var(--clay); font-size: 0.9rem; margin-top: 2px; }
+
+.qtyControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1px solid rgba(42,24,16,0.1);
+  border-radius: 20px;
+  padding: 4px 8px;
+}
+.qtyControls button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--clay);
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  transition: color 0.2s;
+}
+.qtyControls button:hover { color: var(--deep-brown); }
+.qtyControls span {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  min-width: 18px;
+  text-align: center;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: rgba(42,24,16,0.25);
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.deleteBtn:hover { color: var(--clay); }
+
+.footer {
+  padding: 20px 28px;
+  background: white;
+  border-top: 2px solid rgba(42,24,16,0.08);
+  flex-shrink: 0;
+}
+
+.footerTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.footerTotalLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(42,24,16,0.5);
+}
+.footerTotalAmount {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--deep-brown);
+}
+
+.checkoutBtn {
+  width: 100%;
+  background: var(--clay);
+  color: white;
+  border: none;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+.checkoutBtn:hover {
+  background: var(--terracotta);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,98,45,0.35);
+}
+
+/* ---- CHECKOUT FORM ---- */
+.checkout { padding-bottom: 20px; }
+
+.toggleGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(42,24,16,0.06);
+  padding: 3px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  gap: 2px;
+}
+.toggleBtn {
+  padding: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  background: transparent;
+  color: rgba(42,24,16,0.5);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.toggleBtn.active { background: var(--clay); color: white; }
+
+.formGroup { margin-bottom: 14px; }
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(42,24,16,0.5);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid rgba(42,24,16,0.15);
+  background: white;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--deep-brown);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input:focus, .textarea:focus { border-color: var(--clay); }
+.textarea { resize: vertical; }
+
+.cardElement { margin-bottom: 16px; }
+.stripeBox {
+  padding: 14px;
+  border: 1px solid rgba(42,24,16,0.15);
+  background: white;
+  border-radius: var(--radius-sm);
+}
+
+.totalBox {
+  background: rgba(42,24,16,0.04);
+  border: 1px solid rgba(42,24,16,0.08);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  padding: 3px 0;
+}
+.grandTotal {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--deep-brown);
+  padding-top: 10px;
+  margin-top: 8px;
+  border-top: 1px solid rgba(42,24,16,0.1);
+}
+
+.placeOrderBtn {
+  width: 100%;
+  background: var(--clay);
+  color: white;
+  border: none;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+.placeOrderBtn:hover:not(:disabled) {
+  background: var(--terracotta);
+  transform: translateY(-2px);
+}
+.placeOrderBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+@media (max-width: 768px) {
+  .sidebar { width: 100%; right: -100%; }
+  .formRow { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,35 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 20px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+.logo   { font-size: 3rem; margin-bottom: 12px; }
+.title  { font-family: var(--font-display); font-size: 1.5rem; color: var(--warm-gold); font-weight: 900; }
+.subtitle { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 4px 0 32px; }
+
+.form { text-align: left; display: flex; flex-direction: column; gap: 16px; }
+.group { display: flex; flex-direction: column; }
+
+.error {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #EF4444;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.submitBtn { width: 100%; justify-content: center; padding: 12px; font-size: 0.85rem; margin-top: 4px; }
+.submitBtn:disabled { opacity: 0.6; cursor: not-allowed; }

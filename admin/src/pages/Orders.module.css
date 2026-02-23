@@ -1,0 +1,78 @@
+.page { max-width: 1000px; }
+.pageHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.pageTitle { font-family: var(--font-display); font-size: 1.8rem; color: var(--warm-gold); font-weight: 900; }
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.filterGroup { display: flex; gap: 6px; flex-wrap: wrap; }
+.filterBtn {
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 20px;
+  transition: var(--transition);
+}
+.filterBtn:hover { border-color: var(--clay); color: var(--clay); }
+.filterBtn.active { background: var(--clay); border-color: var(--clay); color: white; }
+
+.empty { padding: 40px; text-align: center; color: var(--text-muted); }
+.list  { display: flex; flex-direction: column; gap: 12px; }
+
+.card { display: flex; flex-direction: column; gap: 10px; }
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cardLeft  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cardRight { display: flex; align-items: center; gap: 16px; }
+
+.ref     { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--warm-gold); }
+.type    { font-size: 0.75rem; color: var(--text-muted); }
+.payment { font-size: 0.72rem; color: var(--text-muted); background: rgba(255,255,255,0.04); padding: 2px 8px; border-radius: 10px; }
+.time    { font-size: 0.75rem; color: var(--text-muted); }
+.total   { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--clay); }
+
+.meta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 8px 0;
+  border-top: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+}
+
+.items { display: flex; gap: 6px; flex-wrap: wrap; }
+.item  {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border2);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--text);
+}
+
+.notes {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  background: rgba(245,158,11,0.06);
+  border-left: 2px solid rgba(245,158,11,0.4);
+  padding: 6px 10px;
+  border-radius: 0 4px 4px 0;
+}
+
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }

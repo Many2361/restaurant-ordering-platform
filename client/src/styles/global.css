@@ -1,0 +1,184 @@
+/* =============================================
+   TASTE OF WEST AFRICA — GLOBAL STYLES
+   ============================================= */
+
+:root {
+  --clay:        #C4622D;
+  --terracotta:  #E07B4B;
+  --gold:        #D4A843;
+  --warm-gold:   #F0C060;
+  --deep-brown:  #2A1810;
+  --mid-brown:   #4A2C1A;
+  --light-brown: #8B5E3C;
+  --cream:       #F5EDD8;
+  --soft-cream:  #FDF6E8;
+  --sage:        #5C7A5E;
+  --text-dark:   #1A0E08;
+  --text-mid:    #3D2010;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Crimson Pro', Georgia, serif;
+  --font-mono:    'Space Mono', monospace;
+
+  --shadow-sm:   0 2px 8px rgba(42,24,16,0.08);
+  --shadow-md:   0 8px 24px rgba(42,24,16,0.12);
+  --shadow-lg:   0 16px 48px rgba(42,24,16,0.18);
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  --transition: all 0.25s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--soft-cream);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a  { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ---- TYPOGRAPHY ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  color: var(--deep-brown);
+}
+
+/* ---- UTILITY CLASSES ---- */
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clay);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--clay);
+  flex-shrink: 0;
+}
+
+.section-tag.light { color: var(--gold); }
+.section-tag.light::before { background: var(--gold); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.section-title.light { color: var(--cream); }
+
+/* ---- BUTTONS ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--clay);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--terracotta);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,98,45,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(245,237,216,0.35);
+}
+
+.btn-outline:hover {
+  border-color: var(--warm-gold);
+  color: var(--warm-gold);
+}
+
+.btn-dark {
+  background: var(--deep-brown);
+  color: var(--cream);
+}
+
+.btn-dark:hover {
+  background: var(--mid-brown);
+  transform: translateY(-2px);
+}
+
+/* ---- SPICY BADGE ---- */
+.badge-spicy {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(196,98,45,0.12);
+  color: var(--clay);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- LOADING SPINNER ---- */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(196,98,45,0.2);
+  border-top-color: var(--clay);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 60px auto;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- SCROLL REVEAL ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- RESPONSIVE CONTAINER ---- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  body { font-size: 16px; }
+}

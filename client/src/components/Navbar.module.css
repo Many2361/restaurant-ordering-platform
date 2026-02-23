@@ -1,0 +1,79 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(42,24,16,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,168,67,0.15);
+  transition: all 0.3s ease;
+}
+
+.scrolled {
+  padding: 14px 48px;
+  background: rgba(42,24,16,0.97);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--warm-gold);
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,237,216,0.75);
+  transition: color 0.2s;
+}
+
+.links a:hover,
+.links a.active { color: var(--warm-gold); }
+
+.cartBtn {
+  position: relative;
+  background: var(--clay);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.cartBtn:hover { background: var(--terracotta); }
+
+.badge {
+  position: absolute;
+  top: -8px; right: -8px;
+  background: var(--warm-gold);
+  color: var(--deep-brown);
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .links { display: none; }
+}
