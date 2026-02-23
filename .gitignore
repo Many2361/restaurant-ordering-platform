@@ -1,13 +1,14 @@
-# Dependencies
+# Dependencies - never upload these (too large)
 node_modules/
+**/node_modules/
 
-# Environment variables - NEVER commit these
+# Environment variables - NEVER upload these (contains passwords)
 .env
-.env.local
-.env.production
+**/.env
 
 # Build outputs
 dist/
+**/dist/
 build/
 
 # OS files
@@ -16,4 +17,3 @@ Thumbs.db
 
 # Logs
 *.log
-npm-debug.log*
