@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './Login.module.css';
 
 export default function Login() {
-  const { login }   = useAuth();
-  const navigate    = useNavigate();
-  const [form, setForm]     = useState({ email: '', password: '' });
-  const [error, setError]   = useState('');
+  const { login }             = useAuth();
+  const navigate              = useNavigate();
+  const [form, setForm]       = useState({ email: '', password: '' });
+  const [error, setError]     = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -64,13 +64,15 @@ export default function Login() {
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
+
+          <p style={{ textAlign: 'center', marginTop: '12px' }}>
+            <Link to="/forgot-password" style={{ color: '#C4622D', fontSize: '0.9rem' }}>
+              Forgot your password?
+            </Link>
+          </p>
+
         </form>
       </div>
     </div>
   );
 }
-<p style={{ textAlign: 'center', marginTop: '12px' }}>
-  <Link to="/forgot-password" style={{ color: '#C4622D', fontSize: '0.9rem' }}>
-    Forgot your password?
-  </Link>
-</p>
