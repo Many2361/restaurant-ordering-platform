@@ -8,7 +8,7 @@ export default function Home() {
   const { addItem, setIsOpen } = useCart();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/menu/featured')
+    fetch(`${import.meta.env.VITE_API_URL}/api/menu/featured`)
       .then(res => res.json())
       .then(data => {
         console.log('Featured data:', data);
