@@ -1,19 +1,15 @@
-# Dependencies - never upload these (too large)
-node_modules/
-**/node_modules/
-
-# Environment variables - NEVER upload these (contains passwords)
+# Environment variables
 .env
 **/.env
 
-# Build outputs
-dist/
-**/dist/
-build/
+# Dependencies
+node_modules
+**/node_modules
 
-# OS files
+# Build
+dist
+**/dist
+
+# OS
 .DS_Store
 Thumbs.db
-
-# Logs
-*.log
