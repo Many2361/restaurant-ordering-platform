@@ -6,6 +6,8 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Orders from './pages/Orders';
 import MenuManager from './pages/MenuManager';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 // Wrapper that redirects to /login if not authenticated
 function ProtectedRoute({ children }) {
@@ -41,6 +43,8 @@ export default function App() {
           <Route index                element={<Dashboard />}   />
           <Route path="orders"        element={<Orders />}      />
           <Route path="menu"          element={<MenuManager />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
       </Routes>
     </>
