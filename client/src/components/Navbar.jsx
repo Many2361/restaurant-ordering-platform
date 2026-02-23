@@ -23,7 +23,7 @@ export default function Navbar() {
       <ul className={styles.links}>
         <li><Link to="/" className={location.pathname === '/' ? styles.active : ''}>Home</Link></li>
         <li><Link to="/menu" className={location.pathname === '/menu' ? styles.active : ''}>Menu</Link></li>
-        <li><a href="#contact">Find Us</a></li>
+        <Link to="/find-us">Find-Us</Link>
       </ul>
 
       <button className={styles.cartBtn} onClick={() => setIsOpen(true)}>

@@ -6,6 +6,7 @@ import Cart from './components/Cart';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import OrderConfirmation from './pages/OrderConfirmation';
+import FindUs from './pages/FindUs';
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/"            element={<Home />} />
         <Route path="/menu"        element={<Menu />} />
         <Route path="/order/:ref"  element={<OrderConfirmation />} />
+        <Route path="/find-us" element={<FindUs />} />
       </Routes>
 
       <Footer />

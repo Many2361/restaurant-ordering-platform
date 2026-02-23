@@ -1,20 +1,23 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getFeatured } from '../api';
 import { useCart } from '../context/CartContext';
 import styles from './Home.module.css';
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);
-  const { addItem, setIsOpen }  = useCart();
-  const revealRefs = useRef([]);
+  const { addItem, setIsOpen } = useCart();
 
   useEffect(() => {
-    getFeatured()
-      .then(res => setFeatured(res.data.items))
-      .catch(() => {}); // silently fail if API is down
+    fetch('http://localhost:5000/api/menu/featured')
+      .then(res => res.json())
+      .then(data => {
+        console.log('Featured data:', data);
+        if (data.items && data.items.length > 0) {
+          setFeatured(data.items);
+        }
+      })
+      .catch(err => console.log('Fetch error:', err));
 
-    // Scroll reveal observer
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('visible');
@@ -63,7 +66,7 @@ export default function Home() {
 
       {/* ---- ABOUT ---- */}
       <section className={styles.about} id="about">
-        <div className={`${styles.aboutLeft} reveal`}>
+        <div className={styles.featuredHeader}>
           <p className="section-tag light">Our Story</p>
           <h2 className="section-title light">Rooted in Tradition</h2>
           <p className={styles.aboutText}>
@@ -78,10 +81,10 @@ export default function Home() {
         </div>
         <div className={`${styles.aboutTiles} reveal`}>
           {[
-            { icon: '🍲', label: 'Service',   val: 'Dine-in'   },
-            { icon: '🛵', label: 'Delivery',  val: 'Available' },
-            { icon: '🕐', label: 'Open Until',val: '11:45 PM'  },
-            { icon: '⭐', label: 'Rated',     val: '5.0 Stars' },
+            { icon: '🍲', label: 'Service',    val: 'Dine-in'   },
+            { icon: '🛵', label: 'Delivery',   val: 'Available' },
+            { icon: '🕐', label: 'Opening Time', val: 'Mon–Sat 10–11pm, Sun 10–9:30pm' },
+            { icon: '⭐', label: 'Rated',      val: '5.0 Stars' },
           ].map(tile => (
             <div key={tile.label} className={styles.tile}>
               <div className={styles.tileIcon}>{tile.icon}</div>
@@ -93,45 +96,71 @@ export default function Home() {
       </section>
 
       {/* ---- FEATURED DISHES ---- */}
-      {featured.length > 0 && (
-        <section className={styles.featured}>
-          <div className="container">
-            <div className={`${styles.featuredHeader} reveal`}>
-              <p className="section-tag">Must Try</p>
-              <h2 className="section-title">Featured Dishes</h2>
-            </div>
+      <section className={styles.featured}>
+        <div className="container">
+          <div className={`${styles.featuredHeader} reveal`}>
+            <p className="section-tag">Must Try</p>
+            <h2 className="section-title" style={{ color: 'var(--deep-brown)' }}>
+              Featured Dishes
+            </h2>
+            <p className={styles.featuredSubtitle}>
+              Hover over a dish to find out more
+            </p>
+          </div>
+
+          {featured.length === 0 ? (
+            <p style={{ textAlign: 'center', color: '#999', padding: '40px 0' }}>
+              Loading dishes...
+            </p>
+          ) : (
             <div className={styles.featuredGrid}>
               {featured.map((item, i) => (
                 <div
-                  key={item._id}
-                  className={`${styles.featuredCard} reveal`}
-                  style={{ transitionDelay: `${i * 0.1}s` }}
-                >
-                  <div className={styles.cardBody}>
-                    <h3 className={styles.cardName}>{item.name}</h3>
-                    <p className={styles.cardDesc}>{item.description}</p>
-                  </div>
-                  <div className={styles.cardFooter}>
-                    <span className={styles.cardPrice}>£{item.price.toFixed(2)}</span>
-                    <div className={styles.cardActions}>
-                      {item.isSpicy && <span className="badge-spicy">🌶 Spicy</span>}
+                    key={item._id}
+                    className={styles.flipCard}
+                    style={{ transitionDelay: `${i * 0.1}s` }}
+                  >
+                  <div className={styles.flipInner}>
+
+                    {/* FRONT */}
+                    <div className={styles.flipFront}>
+                      <div className={styles.flipEmoji}>🍲</div>
+                      <h3 className={styles.flipName}>{item.name}</h3>
+                      <span className={styles.flipPrice}>
+                        £{item.price.toFixed(2)}
+                      </span>
+                      {item.isSpicy && (
+                        <span className="badge-spicy">🌶 Spicy</span>
+                      )}
+                      <p className={styles.flipHint}>Hover to see more</p>
+                    </div>
+
+                    {/* BACK */}
+                    <div className={styles.flipBack}>
+                      <h3 className={styles.flipNameBack}>{item.name}</h3>
+                      <p className={styles.flipDesc}>{item.description}</p>
+                      <span className={styles.flipPriceBack}>
+                        £{item.price.toFixed(2)}
+                      </span>
                       <button
-                        className={styles.addBtn}
+                        className={styles.flipBtn}
                         onClick={() => { addItem(item); setIsOpen(true); }}
                       >
-                        + Add
+                        + Add to Order
                       </button>
                     </div>
+
                   </div>
                 </div>
               ))}
             </div>
-            <div className={styles.featuredCta}>
-              <Link to="/menu" className="btn btn-primary">View Full Menu</Link>
-            </div>
+          )}
+
+          <div className={styles.featuredCta}>
+            <Link to="/menu" className="btn btn-primary">View Full Menu</Link>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ---- CONTACT ---- */}
       <section className={styles.contact} id="contact">
@@ -142,10 +171,10 @@ export default function Home() {
           </div>
           <div className={styles.contactGrid}>
             {[
-              { icon: '📍', label: 'Address',  val: 'Unit 5, 11 Parry Place', sub: 'London SE18 6AN' },
-              { icon: '📞', label: 'Phone',    val: '07940 221089',           sub: 'Call to reserve or enquire' },
-              { icon: '🕐', label: 'Hours',    val: 'Open Daily',             sub: 'Closes at 11:45 PM' },
-              { icon: '💳', label: 'Payment',  val: 'Cards & Contactless',    sub: 'Credit, debit & NFC' },
+              { icon: '📍', label: 'Address', val: 'Unit 5, 11 Parry Place', sub: 'London SE18 6AN' },
+              { icon: '📞', label: 'Phone',   val: '07940 221089',           sub: 'Call to reserve or enquire' },
+              { icon: '🕐', label: 'Hours',   val: 'Opening Time',             sub: 'Mon–Sat 10–11pm, Sun 10–9:30pm' },
+              { icon: '💳', label: 'Payment', val: 'Cards & Contactless',    sub: 'Credit, debit & NFC' },
             ].map(item => (
               <div key={item.label} className={`${styles.contactCard} reveal`}>
                 <div className={styles.contactIcon}>{item.icon}</div>

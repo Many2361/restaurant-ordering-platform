@@ -16,7 +16,7 @@ export default function OrderConfirmation() {
         </p>
         <p className={styles.contact}>
           Questions? Call us on{' '}
-          <a href="tel:07940221089" className={styles.phone}>07940 221089</a>
+          <p> className={styles.phone}07940 221089</p>
         </p>
         <Link to="/menu" className={`btn btn-primary ${styles.btn}`}>
           Order Again
