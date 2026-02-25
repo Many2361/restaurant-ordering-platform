@@ -3,7 +3,9 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 const protect = require('../middleware/auth');
+
 const resetTokens = {};
 
 // ---- LOGIN ----
@@ -81,14 +83,20 @@ router.post('/forgot-password', async (req, res) => {
     if (email.toLowerCase() !== process.env.ADMIN_EMAIL?.toLowerCase()) {
       return res.status(404).json({ message: 'Email not found' });
     }
-    const token = crypto.randomBytes(32).toString('hex');
-    const expires = Date.now() + 3600000;
+
+    const token   = crypto.randomBytes(32).toString('hex');
+    const expires = Date.now() + 3600000; // 1 hour
     resetTokens[token] = { email, expires };
 
-    const nodemailer = require('nodemailer');
+    // Use port 587 (Render free tier blocks 465)
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
     const resetUrl = `${process.env.ADMIN_URL}/reset-password?token=${token}`;
@@ -106,6 +114,7 @@ router.post('/forgot-password', async (req, res) => {
         <p>If you did not request this, ignore this email.</p>
       `,
     });
+
     res.json({ success: true, message: 'Reset link sent to your email' });
   } catch (err) {
     console.error('Forgot password error:', err);
@@ -118,7 +127,10 @@ router.post('/reset-password', async (req, res) => {
   try {
     const { token, newPassword } = req.body;
     const record = resetTokens[token];
-    if (!record) return res.status(400).json({ message: 'Invalid or expired reset token' });
+
+    if (!record) {
+      return res.status(400).json({ message: 'Invalid or expired reset token' });
+    }
     if (Date.now() > record.expires) {
       delete resetTokens[token];
       return res.status(400).json({ message: 'Reset token has expired' });
@@ -126,12 +138,14 @@ router.post('/reset-password', async (req, res) => {
     if (newPassword.length < 8) {
       return res.status(400).json({ message: 'Password must be at least 8 characters' });
     }
+
     const hash = await bcrypt.hash(newPassword, 10);
     delete resetTokens[token];
+
     res.json({
       success: true,
       hash,
-      message: 'Update ADMIN_PASSWORD_HASH in your environment variables',
+      message: 'Update ADMIN_PASSWORD_HASH in your Render environment variables',
     });
   } catch (err) {
     console.error('Reset password error:', err);
