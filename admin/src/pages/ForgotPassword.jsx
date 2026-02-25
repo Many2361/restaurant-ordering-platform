@@ -61,7 +61,7 @@ export default function ForgotPassword() {
                 className={styles.input}
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="admin@tasteowestafrica.co.uk"
+                placeholder="gmail.co.uk"
                 required
               />
             </div>
