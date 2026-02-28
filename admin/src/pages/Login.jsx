@@ -15,15 +15,13 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      await login(form.email, form.password);
-      alert('Login success! Redirecting...');
-      navigate('/dashboard', { replace: true });
-    } catch (err) {
-      alert('Login failed: ' + JSON.stringify(err.response?.data));
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+  await login(form.email, form.password);
+  alert('Login success! Token: ' + localStorage.getItem('towa_admin_token'));
+  window.location.href = '/dashboard';  // force hard redirect instead of navigate
+} catch (err) {
+  alert('Login failed: ' + JSON.stringify(err.response?.data));
+  setError(err.response?.data?.message || 'Login failed. Please try again.');
+}
   };
 
   return (
