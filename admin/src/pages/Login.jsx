@@ -10,19 +10,22 @@ export default function Login() {
   const [error, setError]     = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-    try {
-      await login(form.email, form.password);
-      navigate('/dashboard', { replace: true });
-    } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setLoading(true);
+  try {
+    await login(form.email, form.password);
+    alert('Login success! Redirecting...');
+    navigate('/dashboard', { replace: true });
+  } catch (err) {
+    alert('Login failed: ' + JSON.stringify(err.response?.data));
+    setError(err.response?.data?.message || 'Login failed. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className={styles.page}>
