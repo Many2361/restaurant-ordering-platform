@@ -5,15 +5,12 @@
 }
 
 .sidebar {
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  display: flex;
+  background: flex;
   flex-direction: column;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
   height: 100vh;
-  overflow-y: auto;
+  width: 220px;
+  background: #1a1a2e;
+  padding: 20px 16px;
 }
 
 .sidebarTop { padding: 24px 16px; }
