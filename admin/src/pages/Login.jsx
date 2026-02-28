@@ -16,7 +16,7 @@ export default function Login() {
     setLoading(true);
     try {
       await login(form.email, form.password);
-      navigate('/', { replace: true });
+      navigate('/dashboard', { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
     } finally {
