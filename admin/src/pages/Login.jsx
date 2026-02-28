@@ -10,22 +10,21 @@ export default function Login() {
   const [error, setError]     = useState('');
   const [loading, setLoading] = useState(false);
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-  setLoading(true);
-  try {
-    await login(form.email, form.password);
-    alert('Login success! Redirecting...');
-    navigate('/dashboard', { replace: true });
-  } catch (err) {
-    alert('Login failed: ' + JSON.stringify(err.response?.data));
-    setError(err.response?.data?.message || 'Login failed. Please try again.');
-  } finally {
-    setLoading(false);
-  }
-};
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      await login(form.email, form.password);
+      alert('Login success! Redirecting...');
+      navigate('/dashboard', { replace: true });
+    } catch (err) {
+      alert('Login failed: ' + JSON.stringify(err.response?.data));
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.page}>
@@ -33,7 +32,6 @@ export default function Login() {
         <div className={styles.logo}>🍲</div>
         <h1 className={styles.title}>Taste of West Africa</h1>
         <p className={styles.subtitle}>Admin Dashboard</p>
-
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.group}>
             <label className="form-label">Email</label>
@@ -57,9 +55,7 @@ export default function Login() {
               required
             />
           </div>
-
           {error && <p className={styles.error}>{error}</p>}
-
           <button
             type="submit"
             className={`btn btn-primary ${styles.submitBtn}`}
@@ -67,13 +63,11 @@ export default function Login() {
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
-
           <p style={{ textAlign: 'center', marginTop: '12px' }}>
             <Link to="/forgot-password" style={{ color: '#C4622D', fontSize: '0.9rem' }}>
               Forgot your password?
             </Link>
           </p>
-
         </form>
       </div>
     </div>
